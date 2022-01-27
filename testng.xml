@@ -4,6 +4,7 @@
   <test thread-count="5" name="Test">
     <classes>
       <class name="com.scripts.MavenActitime.TestLogin"/>
+      <class name="com.scripts.MavenActitime.TestVerify"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
