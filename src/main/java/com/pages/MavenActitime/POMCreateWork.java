@@ -1,6 +1,8 @@
 package com.pages.MavenActitime;
 
 import java.io.IOException;
+import java.sql.Driver;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,6 +14,8 @@ import com.genrics.MavenActitime.ExcelSheetLibrary;
 
 
 public class POMCreateWork extends BasePage implements AutoConstant {
+	
+	public WebDriver driver;
 
 	// Settings Tab
 	@FindBy(xpath = "//div[@class=\"topMenuButton preventPanelsHiding\"][2]")
@@ -40,12 +44,18 @@ public class POMCreateWork extends BasePage implements AutoConstant {
 	// Edit Button
 	@FindBy(xpath = "//a[.=\"IT Support\"]")
 	private WebElement EditButton;
+	
+	//Delete Button
+	@FindBy(xpath = "(//a[.='NetworkingIT Support'])/../.././/a[text()[normalize-space() ='delete']]")
+	private WebElement DeleteButton;
 
 	public POMCreateWork(WebDriver driver) {
+		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
 
-	public void SettingTabMethod() {
+	public void SettingTabMethod() throws InterruptedException {
+		Thread.sleep(2000);
 		SettingTab.click();
 	}
 
@@ -76,4 +86,11 @@ public class POMCreateWork extends BasePage implements AutoConstant {
 		NameField.sendKeys(ExcelSheetLibrary.getCellValue(ExcelSheet, SheetName3, 2, 0));
 	}
 
+	public void DeleteButton() throws InterruptedException
+	{
+		Thread.sleep(2000);
+		DeleteButton.click();
+		driver.switchTo().alert().accept();
+	}
+	
 }

@@ -1,6 +1,8 @@
 package com.pages.MavenActitime;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -10,46 +12,45 @@ import org.openqa.selenium.support.PageFactory;
 import com.genrics.MavenActitime.AutoConstant;
 import com.genrics.MavenActitime.ExcelSheetLibrary;
 
-
-
-//Extend
-
 public class POMCreateLeave implements AutoConstant {
 
 	public String randomString;
 	public WebDriver driver;
 
-	// Settings Tab
+// ------ Settings Tab
 	@FindBy(xpath = "//div[@class=\"topMenuButton preventPanelsHiding\"][2]")
 	private WebElement SettingTab2;
 
-	// LeaveTypeLinkInMenu
+// ------ LeaveTypeLinkInMenu
 	@FindBy(xpath = "//a[.='Leave Types']")
 	private WebElement LeaveTypeLink;
 
-	// CreateLeaveTypeButton
+// ------ CreateLeaveTypeButton
 	@FindBy(xpath = "//div[@class=\"roundedBoxTag graphicButton button \"]")
 	private WebElement CreateLeaveTypeButon;
 
-	// EnterLeaveTypeName
+// ------ EnterLeaveTypeName
 	@FindBy(xpath = "//input[@class=\"inputFieldWithPlaceholder\"]")
 	private WebElement EnterLeaveTypeName;
 
-	// CreateLeaveSubmitButton
+// ------ CreateLeaveSubmitButton
 	@FindBy(xpath = "//div[@class=\"greyButton withIcon commitBtn\"]")
 	private WebElement CreateLeaveSubmitButton;
 
-	// EditLeaveType
+// ------ EditLeaveType
 	@FindBy(xpath = "(//td[.=\"HappyLeave\"])[1]")
 	private WebElement EditLeavebtn;
 
 	@FindBy(xpath = "//input[@id=\"inputDiv\"]")
 	private WebElement EditLeaveBtn2;
-	
-	//// -----------------DeleteXpath
+
+	@FindBy(xpath = "//input[@id=\"inputDiv\"]/../..//td//div[@class=\"applyButton\"]")
+	private WebElement ApplyBtn;
+
+// -------DeleteLeaveType
 
 	@FindBy(xpath = "(//span[.='UrgentLeave'])[1]/../../../../../../td[@class=\"leaveTypeDeleteCell last\"]")
-	private WebElement DeleteXpath;
+	private WebElement DeleteLeaveType;
 
 //	@FindBy(xpath = "//span[.='Delete permanently']")
 //	private WebElement DeleteConfirmation;
@@ -93,26 +94,26 @@ public class POMCreateLeave implements AutoConstant {
 		CreateLeaveSubmitButton.click();
 	}
 
-	public void EditLeave() throws InterruptedException 
+	public void EditLeave() throws InterruptedException, IOException 
 	{
 		EditLeavebtn.click();
-		driver.wait(20);
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		EditLeaveBtn2.clear();
-//		
-//		EditLeavebtn.sendKeys(Keys.CONTROL,"a");
-		
+		Thread.sleep(2000);
+		EditLeaveBtn2.sendKeys(ExcelSheetLibrary.getCellValue(ExcelSheet, SheetName4, 2, 0));
+		ApplyBtn.click();
 	}
 
-	// -------------------
-	public void DeleteXpath() throws InterruptedException {
-		Thread.sleep(5000);
-		DeleteXpath.click();
+// ------- Delete
+	public void DeleteLeaveType() throws InterruptedException {
+		Thread.sleep(3000);
+		DeleteLeaveType.click();
 
 	}
 
+// ------ DeleteConfirmation.click();
 	public void DeleteConfirmation() throws InterruptedException {
-//		DeleteConfirmation.click();
-		Thread.sleep(5000);
+		Thread.sleep(3000);
 		driver.switchTo().alert().accept();
 
 	}

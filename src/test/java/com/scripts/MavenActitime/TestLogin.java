@@ -28,16 +28,17 @@ public class TestLogin extends BaseTest
 		CreateCustomer.NewCustomerMethod();
 		CreateCustomer.CustomerNameMethod();
 		CreateCustomer.CreateCustomerbutton();
+		System.out.println("Customer Created successfully");
 		CreateCustomer.CustomerSearchBar();
 		CreateCustomer.SearchedCustomer();
 		CreateCustomer.SearchedCustomerEditPage();
 		CreateCustomer.DeleteCustomer();
 		CreateCustomer.DeleteConfirmation();
-	
+		System.out.println("Customer Deleted Successfully");
 	}
 	
 	@Test(priority = 2)
-	public void CreateWork() throws IOException 
+	public void CreateWork() throws IOException, InterruptedException 
 	{
 		POMCreateWork CreateWork=new POMCreateWork(driver);
 		CreateWork.SettingTabMethod();
@@ -46,8 +47,12 @@ public class TestLogin extends BaseTest
 		CreateWork.NameFieldMethod();
 		CreateWork.StatusDropDown();
 		CreateWork.SubmitButton();
+		System.out.println("Work Created Sussesfully");
 		CreateWork.EditButton();
 		CreateWork.SubmitButton();
+		System.out.println("Work Updated Successfully");
+		CreateWork.DeleteButton();
+		System.out.println("Work Deleted Successfully");
 	}
 	
 	@Test(priority = 3)
@@ -59,7 +64,12 @@ public class TestLogin extends BaseTest
 		CreateLeave.CreateLeaveTypeButon();
 		CreateLeave.EnterLeaveTypeName();
 		CreateLeave.CreateLeaveSubmitButton();
+		System.out.println("Leave Type created Sucessfully");
 		CreateLeave.EditLeave();
+		System.out.println("Leave Type Updated Successfully");
+		CreateLeave.DeleteLeaveType();
+		CreateLeave.DeleteConfirmation();
+		System.out.println("Leave Type Deleted Successfully");
 		
 	}
 }
